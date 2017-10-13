@@ -8,9 +8,9 @@ class cPlayer
 private:
 	cImage*			m_pPlayerImage;
 	float			m_fGravity;
+	float			m_fJumpPower;
 	bool			m_isJumpping;
 	bool			m_isDobleJumpping;
-	float			m_fJumpPower;
 
 	int				m_nMapYPos;
 
@@ -23,6 +23,7 @@ public:
 	void Render();
 
 	void SetLanding();
-	RECT GetPlayer() { return m_pPlayerImage->GetBoundingBox(); }
+
+	RECT GetPlayer() {return m_pPlayerImage->GetBoundingBox();}
 };
 
