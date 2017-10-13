@@ -16,18 +16,18 @@ cObject::~cObject()
 
 void cObject::Setup()
 {
-
+	srand(time(NULL));
 	m_fMoveSpeed = 10.0f;
 }
 
 void cObject::Update()
 {
-	srand(time(NULL));
+
 
 	m_pObstacle->SetPosX(m_pObstacle->GetPosX() - m_fMoveSpeed);
 	if (m_pObstacle->GetPosX() < 0)
 	{
-		m_nRandPosX = GetRandom(1100, 2000);
+		m_nRandPosX = GetRandom(1500, 2000);
 		m_pObstacle->SetPosX(m_nRandPosX);
 	}
 	
