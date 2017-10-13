@@ -25,6 +25,7 @@ void cMainGame::Setup()
 	m_pMap->Setup();
 	m_pPlayer->Setup();
 	m_pObject->Setup();
+	
 }
 
 void cMainGame::Update()
@@ -36,6 +37,17 @@ void cMainGame::Update()
 		m_pMap->Update();
 		m_pPlayer->Update();
 		m_pObject->Update();
+
+		
+
+			RECT rt;
+			if (IntersectRect(&rt, &m_pPlayer->GetPlayer(), &m_pObject->GetObstacle()))
+			{
+			//	PostQuitMessage(0);
+			}
+
+
+		
 	}
 	else if (g_pKeyManager->isOnceKeyDown(VK_RETURN))
 	{

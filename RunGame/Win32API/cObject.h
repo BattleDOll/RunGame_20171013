@@ -9,6 +9,8 @@ private:
 	float			m_fObsPosY;			// 장애물 y좌표
 	float			m_fMoveSpeed;		// 장애물 이동 속도
 
+	int				m_nRandPosX;
+
 public:
 	cObject();
 	~cObject();
@@ -16,5 +18,7 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+
+	RECT GetObstacle() { return m_pObstacle->GetBoundingBox(); }
 };
 

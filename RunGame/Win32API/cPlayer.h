@@ -23,5 +23,6 @@ public:
 	void Render();
 
 	void SetLanding();
+	RECT GetPlayer() { return m_pPlayerImage->GetBoundingBox(); }
 };
 

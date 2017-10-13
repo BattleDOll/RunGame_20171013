@@ -52,9 +52,17 @@ void cPlayer::Update()
 void cPlayer::Render()
 {
 	m_pPlayerImage->FrameRender(g_hDC,
-		(int)(m_pPlayerImage->GetPosX() - m_pPlayerImage->GetFrameWidth() / 2),
-		(int)(m_pPlayerImage->GetPosY() - m_pPlayerImage->GetFrameHeight() / 2),
-		1, 0, 8, 0, 3);
+	(int)(m_pPlayerImage->GetPosX() - m_pPlayerImage->GetFrameWidth() / 2),
+	(int)(m_pPlayerImage->GetPosY() - m_pPlayerImage->GetFrameHeight() / 2),
+	1, 0, 8, 0, 3);
+
+//	if(m_isJumpping && m_fJumpPower > m_fGravity)
+//	{ 
+//		m_pPlayerImage->FrameRender(g_hDC,
+//		(int)(m_pPlayerImage->GetPosX() - m_pPlayerImage->GetFrameWidth() / 2),
+//		(int)(m_pPlayerImage->GetPosY() - m_pPlayerImage->GetFrameHeight() / 2),
+//		6, 8, 6, 8, 5);
+//	}
 
 	//	RectangleMake(g_hDC, m_pPlayerImage->GetBoundingBox(20, 5));
 

@@ -2,8 +2,9 @@
 #include "cObject.h"
 
 
-cObject::cObject()
-{
+cObject::cObject()	
+{	
+
 	m_pObstacle = new cImage;
 	m_pObstacle->Setup("images/object01.bmp", 75, 75, 1, 1, WINSIZEX, WINSIZEY - 120, true, RGB(255, 0, 255));
 }
@@ -15,13 +16,21 @@ cObject::~cObject()
 
 void cObject::Setup()
 {
+
 	m_fMoveSpeed = 10.0f;
 }
 
 void cObject::Update()
 {
+	srand(time(NULL));
+
 	m_pObstacle->SetPosX(m_pObstacle->GetPosX() - m_fMoveSpeed);
-	if (m_pObstacle->GetPosX() < 0) m_pObstacle->SetPosX(1100);
+	if (m_pObstacle->GetPosX() < 0)
+	{
+		m_nRandPosX = GetRandom(1100, 2000);
+		m_pObstacle->SetPosX(m_nRandPosX);
+	}
+	
 }
 
 void cObject::Render()
@@ -54,4 +63,10 @@ void cObject::Render()
 
 	DeleteObject(hSelectPen);
 	DeleteObject(hPen);
+
+	string str("좌표 : ");
+	char szStr[128];
+
+	str += itoa(m_nRandPosX, szStr, 10); // itoa => 인트형을 문자열로 변환 (변환 소스, 임시 저장소, 숫자의 진수)
+	TextOutA(g_hDC, 25, 25, str.c_str(), str.length());
 }
