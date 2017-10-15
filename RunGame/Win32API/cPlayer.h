@@ -6,13 +6,20 @@
 class cPlayer
 {
 private:
-	cImage*			m_pPlayerImage;
-	float			m_fGravity;
-	float			m_fJumpPower;
-	bool			m_isJumpping;
-	bool			m_isDobleJumpping;
+	cImage*	m_pPlayer;
 
-	int				m_nMapYPos;
+	float	m_fGravity;
+	float	m_fJumpPower;
+
+	int		m_nMapYPos;
+	int		m_nPlayerHP;
+	int		m_nJumpCount;		// 점프 횟수 지정 3>2>1>0....
+	int		m_nGold;
+
+	bool	m_isJumpping;
+	bool	m_isDobleJumpping;
+	bool	m_isSliding;
+	bool	m_isRun;
 
 public:
 	cPlayer();
@@ -24,6 +31,12 @@ public:
 
 	void SetLanding();
 
-	RECT GetPlayer() {return m_pPlayerImage->GetBoundingBox();}
+	RECT GetCollisionNomal() { return m_pPlayer->GetBoundingBox(0, 0, 0, 0); }
+	RECT GetCollisionSliding() { return m_pPlayer->GetBoundingBox(0, -10, 20, 40); }
+
+	int GetPlayerHP() { return m_nPlayerHP; }
+	int GetPlayerGold() { return m_nGold; }
+
+	bool GetSliding() { return m_isSliding; }
 };
 

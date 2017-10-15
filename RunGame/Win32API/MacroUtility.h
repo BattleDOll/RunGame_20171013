@@ -20,15 +20,17 @@ inline void LineMake(HDC hdc, int x1, int y1, int x2, int y2)
 	MoveToEx(hdc, x1, y1, NULL);
 	LineTo(hdc, x2, y2);
 }
-/* //바운딩 선 그리기
-inline void BoundingLineMake(HDC hdc, int x1, int y1, int x2, int y2)
+
+
+//바운딩 선 그리기
+inline void BoundingLineMake(HDC hdc, int x1, int y1, int width, int height)
 {
 	MoveToEx(hdc, x1, y1, NULL);
-	LineTo(hdc, x2, y2);
-	LineTo(hdc, x2, y2);
-	LineTo(hdc, x2, y2);
-	LineTo(hdc, x2, y2);
-}*/
+	LineTo(hdc, width, y1);
+	LineTo(hdc, width, height);
+	LineTo(hdc, x1, height);
+	LineTo(hdc, x1, y1);
+}
 
 //렉트 만들기
 inline RECT RectMake(int x, int y, int width, int height)

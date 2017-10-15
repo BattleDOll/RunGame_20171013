@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="cGameNode.h" />
     <ClInclude Include="cImage.h" />
+    <ClInclude Include="cItem.h" />
     <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMap.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="cGameNode.cpp" />
     <ClCompile Include="cImage.cpp" />
+    <ClCompile Include="cItem.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMap.cpp" />
