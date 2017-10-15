@@ -20,6 +20,6 @@ public:
 	void Update();
 	void Render();
 
-	RECT GetObstacle() { return m_pObstacle->GetBoundingBox(); }
+	RECT GetObstacleCollision() { return m_pObstacle->GetBoundingBox(); }
 };
 

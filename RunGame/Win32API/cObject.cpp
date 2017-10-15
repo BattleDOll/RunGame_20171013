@@ -5,7 +5,7 @@
 cObject::cObject()	
 {
 	m_pObstacle = new cImage;
-	m_pObstacle->Setup("images/object01.bmp", 75, 75, 1, 1, WINSIZEX, WINSIZEY - 186, true, RGB(255, 0, 255));
+	m_pObstacle->Setup("images/object01.bmp", 75, 75, 1, 1, WINSIZEX, WINSIZEY - 160, true, RGB(255, 0, 255));
 }
 
 cObject::~cObject()
@@ -35,7 +35,7 @@ void cObject::Render()
 		m_pObstacle->GetPosX() - m_pObstacle->GetFrameWidth() / 2, 
 		m_pObstacle->GetPosY() - m_pObstacle->GetFrameHeight() / 2);
 
-	RectangleMake(g_hDC, m_pObstacle->GetBoundingBox());
+//	RectangleMake(g_hDC, m_pObstacle->GetBoundingBox());
 //
 //	HPEN hPen = (HPEN)CreatePen(0, 2, RGB(255, 0, 0));
 //	HPEN hSelectPen = (HPEN)SelectObject(g_hDC, hPen);

@@ -43,13 +43,12 @@ void cMainGame::Update()
 		m_pObject->Update();	
 		m_pItem->Update();
 
-			
-   			if (!m_isSliding)
+			// 슬라이딩이 아닐 때 충돌 처리
+			if (m_isSliding = false)
 			{ 
 				RECT rt;
-				if ( IntersectRect(&rt, &m_pPlayer->GetCollisionNomal(), &m_pObject->GetObstacle()))
-				{
-					
+				if ( IntersectRect(&rt, &m_pPlayer->GetCollisionNomal(), &m_pObject->GetObstacleCollision()))
+				{					
 					if (m_nHP <= 0)
 					{
 						//PostQuitMessage(0);
@@ -67,20 +66,21 @@ void cMainGame::Update()
 				}
 			}
 
-			if (m_isSliding)
+			// 슬라이딩 일 때 충돌 처리
+			if (m_isSliding = true)
 			{
 				RECT rt1;
-				if ( IntersectRect(&rt1, &m_pPlayer->GetCollisionSliding(), &m_pObject->GetObstacle()))
+				if ( IntersectRect(&rt1, &m_pPlayer->GetCollisionSliding(), &m_pObject->GetObstacleCollision()))
 				{
 			
 					if (m_nHP <= 0)
 					{
-						//PostQuitMessage(0);
+					//  	PostQuitMessage(0);
 					}
 					if (m_nHP > 0 && !m_isCollosion)
 					{
 						m_isCollosion = true;
-						m_nHP += 10;
+						m_nHP += 10; // collision  확인 용으로 사용
 					}
 				}
 				else

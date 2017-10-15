@@ -21,18 +21,15 @@ void cPlayer::Setup()
 
 	m_isSliding = false;
 
-
 	SetLanding();
 }
 
 void cPlayer::Update()
 {
-	if (g_pKeyManager->isStayKeyDown(VK_SHIFT))
+	if (g_pKeyManager->isStayKeyDown(VK_SHIFT) && !m_isJumpping)
 	{	
 		m_isSliding = true;
 		m_isRun = false;
-
-		m_pPlayer->GetBoundingBox(0, -20, 0, 20);
 	}
 	else
 	{
@@ -42,7 +39,7 @@ void cPlayer::Update()
 
 	if(g_pKeyManager->isOnceKeyDown(VK_SPACE)) // 변수로 처리 하자 ->> 카운트(점프 가능 횟수--)하고 렌딩시 카운트 초기화(맥스값으로)//
 	{	
-		if (!m_isJumpping && !m_isDobleJumpping)
+		if (!m_isJumpping && !m_isDobleJumpping && !m_isSliding)
 		{
 			m_isJumpping = true;
 		}
@@ -76,7 +73,6 @@ void cPlayer::Render()
 			(int)(m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2),
 			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
 			1, 0, 8, 0, 5);
-
 	}
 
 	if (m_isSliding)

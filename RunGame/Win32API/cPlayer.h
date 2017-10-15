@@ -31,7 +31,7 @@ public:
 
 	void SetLanding();
 
-	RECT GetCollisionNomal() { return m_pPlayer->GetBoundingBox(0, 0, 0, 0); }
+	RECT GetCollisionNomal() { return m_pPlayer->GetBoundingBox(); }
 	RECT GetCollisionSliding() { return m_pPlayer->GetBoundingBox(0, -10, 20, 40); }
 
 	int GetPlayerHP() { return m_nPlayerHP; }

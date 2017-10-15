@@ -5,7 +5,7 @@
 cItem::cItem()
 { 
 	m_pGoldImage = new cImage;
-	m_pGoldImage->Setup("images/object.bmp", 256, 256, 4, 4, WINSIZEX, WINSIZEY - 200, true, RGB(255, 0, 255));
+	m_pGoldImage->Setup("images/object.bmp", 256, 256, 4, 4, WINSIZEX, WINSIZEY - 400, true, RGB(255, 0, 255));
 }
 
 
