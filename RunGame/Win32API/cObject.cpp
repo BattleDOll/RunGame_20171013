@@ -5,7 +5,7 @@
 cObject::cObject()	
 {
 	m_pObstacle = new cImage;
-	m_pObstacle->Setup("images/object01.bmp", 75, 75, 1, 1, WINSIZEX, WINSIZEY - 160, true, RGB(255, 0, 255));
+	m_pObstacle->Setup("images/object01.bmp", 75, 75, 1, 1, WINSIZEX, WINSIZEY - 130, true, RGB(255, 0, 255));
 }
 
 cObject::~cObject()

@@ -82,7 +82,7 @@ void cPlayer::Render()
 			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
 			5, 1, 11, 1, 6);
 
-		RectangleMake(g_hDC, m_pPlayer->GetBoundingBox(0, -10, 20, 40));
+//		RectangleMake(g_hDC, m_pPlayer->GetBoundingBox(0, -10, 20, 40));
 	}
 
 	if(m_isJumpping && m_fJumpPower > m_fGravity)

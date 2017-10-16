@@ -29,7 +29,6 @@ void cMainGame::Setup()
 
 	m_nHP = m_pPlayer->GetPlayerHP();
 	m_nGold = m_pPlayer->GetPlayerGold();
-	m_isSliding = m_pPlayer->GetSliding();
 }
 
 void cMainGame::Update()
@@ -43,8 +42,10 @@ void cMainGame::Update()
 		m_pObject->Update();	
 		m_pItem->Update();
 
+		m_isSliding = m_pPlayer->GetSliding();
+
 			// 슬라이딩이 아닐 때 충돌 처리
-			if (m_isSliding = false)
+			if (!m_isSliding)
 			{ 
 				RECT rt;
 				if ( IntersectRect(&rt, &m_pPlayer->GetCollisionNomal(), &m_pObject->GetObstacleCollision()))
@@ -67,7 +68,7 @@ void cMainGame::Update()
 			}
 
 			// 슬라이딩 일 때 충돌 처리
-			if (m_isSliding = true)
+			else
 			{
 				RECT rt1;
 				if ( IntersectRect(&rt1, &m_pPlayer->GetCollisionSliding(), &m_pObject->GetObstacleCollision()))
