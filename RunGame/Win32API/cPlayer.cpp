@@ -5,12 +5,13 @@
 cPlayer::cPlayer()
 {
 	m_pPlayer = new cImage;
-	m_pPlayer->Setup("images/ch.bmp", 960, 960, 12, 12, 200, MAP1_Y, true, RGB(255, 0, 255));
+	m_pPlayer->Setup("images/RunGame.bmp", 960, 960, 12, 12, 200, MAP1_Y, true, RGB(255, 0, 255));
 }
 
 
 cPlayer::~cPlayer()
 {
+	delete m_pPlayer;
 }
 
 void cPlayer::Setup()
@@ -67,53 +68,70 @@ void cPlayer::Update()
 
 void cPlayer::Render()
 {
-	if(m_isRun)
+	
+	HPEN hPen = (HPEN)CreatePen(0, 2, RGB(255, 0, 0));
+	HPEN hSelectPen = (HPEN)SelectObject(g_hDC, hPen);
+
+	if(m_isRun && !m_isJumpping)
 	{ 
 		m_pPlayer->FrameRender(g_hDC,
-			(int)(m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2),
-			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
-			1, 0, 8, 0, 5);
+			m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2,
+			m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2,
+			1, 0, 8, 0, 3);
+
+		BoudingLineMake(g_hDC,
+			m_pPlayer->GetBoundingBox().left,
+			m_pPlayer->GetBoundingBox().top,
+			m_pPlayer->GetFrameWidth(),
+			m_pPlayer->GetFrameHeight());
 	}
 
 	if (m_isSliding)
 	{
 		m_pPlayer->FrameRender(g_hDC,
-			(int)(m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2),
-			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
-			5, 1, 11, 1, 6);
+			m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2,
+			m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2,
+			5, 1, 11, 1, 3);
 
-//		RectangleMake(g_hDC, m_pPlayer->GetBoundingBox(0, -10, 20, 40));
+		BoudingLineMake(g_hDC,
+			m_pPlayer->GetBoundingBox(0, -10, 20, 40).left,
+			m_pPlayer->GetBoundingBox(0, -10, 20, 40).top,
+			m_pPlayer->GetFrameWidth() -20,
+			m_pPlayer->GetFrameHeight() -40);
 	}
 
-	if(m_isJumpping && m_fJumpPower > m_fGravity)
+	if(  m_isJumpping && m_fJumpPower > m_fGravity)
 	{ 
-		m_pPlayer->FrameRender(g_hDC,
-			(int)(m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2),
-			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
-			0, 2, 0, 2, 0);
+		m_pPlayer->FrameRender(g_hDC, 
+			m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2, 
+			m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2,
+			0, 
+			2);
+
+		BoudingLineMake(g_hDC,
+			m_pPlayer->GetBoundingBox().left,
+			m_pPlayer->GetBoundingBox().top,
+			m_pPlayer->GetFrameWidth(),
+			m_pPlayer->GetFrameHeight());
 	}
 
-	if (m_isJumpping && m_fJumpPower < m_fGravity)
+	if (  m_isJumpping && m_fJumpPower < m_fGravity)
 	{
-		m_pPlayer->FrameRender(g_hDC,
-			(int)(m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2),
-			(int)(m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2),
-			5, 9, 5, 9, 0);
+		m_pPlayer->FrameRender(g_hDC, 
+			m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2, 
+			m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2, 
+			5, 
+			9);
+
+		BoudingLineMake(g_hDC,
+			m_pPlayer->GetBoundingBox().left,
+			m_pPlayer->GetBoundingBox().top,
+			m_pPlayer->GetFrameWidth(),
+			m_pPlayer->GetFrameHeight());
 	}
-
-//	RectangleMake(g_hDC, m_pPlayer->GetBoundingBox(20, 5));
-
-//	HPEN hPen = (HPEN)CreatePen(0, 2, RGB(255, 0, 0));
-//	HPEN hSelectPen = (HPEN)SelectObject(g_hDC, hPen);
-//
-//	BoundingLineMake(g_hDC,
-//		m_pPlayer->GetPosX() - m_pPlayer->GetFrameWidth() / 2 ,
-//		m_pPlayer->GetPosY() - m_pPlayer->GetFrameHeight() / 2,
-//		m_pPlayer->GetPosX() + m_pPlayer->GetFrameWidth() /2 ,
-//		m_pPlayer->GetPosY() + m_pPlayer->GetFrameHeight() /2);
-//
-//	DeleteObject(hSelectPen);
-//	DeleteObject(hPen);
+	
+	DeleteObject(hSelectPen);
+	DeleteObject(hPen);
 }
 
 void cPlayer::SetLanding()

@@ -1,25 +1,28 @@
 #pragma once
 #include "cImage.h"
-struct tagGold
-{
 
-	float		m_fPosX;			// xÁÂÇ¥
-	float		m_fPosY;			// yÁÂÇ¥
-	float		m_fMoveSpeed;		// ÀÌµ¿ ¼Óµµ
+#define GEN_DELAY 30
+#define OBJECT_SPEED 10
+
+enum E_TYPE { ET_COIN, ET_SPEED, ET_MAX };
+
+struct tagItem
+{
+	E_TYPE		type;
+	float		PosX;			// xÁÂÇ¥
+	float		PosY;			// yÁÂÇ¥
+	int			Score;			// ÀÌµ¿ ¼Óµµ
 };
 
 class cItem
 {
 private:
-	cImage*				m_pGoldImage;
+	vector<tagItem>				m_vecItem;			//¿ÀºêÁ§Æ® º¤ÅÍ
+	vector<tagItem>::iterator	m_vecIter;			//¿ÀºêÁ§Æ® º¤ÅÍ ¹Ýº¹ÀÚ
 
-	tagGold				m_stGold;
-	vector<tagGold>		m_vecGold;
+	cImage*				m_pImage;
 
-	int					m_nGoldDelay;
-
-	int					m_nRandPosX;		//·»´ý »ý¼º ÁÂÇ¥
-	int					m_nRandPosY;		//·»´ý »ý¼º ÁÂÇ¥
+	int					m_nDelay;
 
 public:
 	cItem();
@@ -28,7 +31,7 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+	void CreateItem();
 
-	vector<tagGold>& GetGold() { return m_vecGold; }
 };
 

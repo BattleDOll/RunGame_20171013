@@ -23,12 +23,12 @@ inline void LineMake(HDC hdc, int x1, int y1, int x2, int y2)
 
 
 //바운딩 선 그리기
-inline void BoundingLineMake(HDC hdc, int x1, int y1, int width, int height)
+inline void BoudingLineMake(HDC hdc, int x1, int y1, int sizeX, int sizeY)
 {
 	MoveToEx(hdc, x1, y1, NULL);
-	LineTo(hdc, width, y1);
-	LineTo(hdc, width, height);
-	LineTo(hdc, x1, height);
+	LineTo(hdc, x1 + sizeX, y1);
+	LineTo(hdc, x1 + sizeX, y1 + sizeY);
+	LineTo(hdc, x1, y1 + sizeY);
 	LineTo(hdc, x1, y1);
 }
 
