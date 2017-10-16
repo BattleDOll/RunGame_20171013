@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "cItem.h"
+#include "cMap.h"
+#include "cPlayer.h"
+
 
 
 cItem::cItem()
@@ -16,31 +19,55 @@ cItem::~cItem()
 
 void cItem::Setup()
 {
-	srand(time(NULL));
-	m_pImage = 0;
+	m_nDelay = 0;
 }
 
 void cItem::Update()
 {
-	//if (m_nDelay < GEN_DELAY)
+	if (m_nDelay < GEN_DELAY)
+		++m_nDelay;
+	
+	else
+	{
+		m_nDelay = 0;
+		CreateItem();
+	}
+	
+	for (m_vecIter = m_vecItem.begin(); m_vecIter != m_vecItem.end(); ++m_vecIter)
+	{
+		if (m_pMap->GetSlow() > 0)
+			m_vecIter->PosX -= OBJECT_SPEED / 2;
+		else
+			m_vecIter->PosX -= OBJECT_SPEED;
+
+			RECT rt;
+			RECT rtItem = RectMake(m_vecIter->PosX, m_vecIter->PosY, m_pImage->GetFrameWidth(), m_pImage->GetFrameHeight());
+			if (IntersectRect(&rt, &m_pPlayer->GetCollisionNomal(), &rtItem))
+			{
+				switch (m_vecIter->type)
+				{
+				case ET_COIN:
+					m_vecIter = m_vecItem.erase(m_vecIter);
+					break;
+				case ET_SPEED:
+					m_vecIter = m_vecItem.erase(m_vecIter);
+					break;
+				}
+			}	
+	}
+
+	//if (m_vecIter->PosX < -m_pImage->GetFrameWidth())
 	//{
-	//	++m_pImage;
+	//	m_vecIter = m_vecItem.erase(m_vecIter);
 	//}
-	//else
-	//{
-	//	m_pImage = 0;
-	//}
-	//
-	//for (m_vecIter = m_vecItem.begin(); m_vecIter != m_vecItem.end(); m_vecIter++)
-	//{
-	//
-	//}
+
 }
 
 void cItem::Render()
 {
 	POINT ptImgPos;
-	for (m_vecIter = m_vecItem.begin(); m_vecIter != m_vecItem.end(); m_vecIter++)
+
+	for (m_vecIter = m_vecItem.begin(); m_vecIter != m_vecItem.end(); ++m_vecIter)
 	{
 		ptImgPos.y = 11;
 
@@ -68,13 +95,15 @@ void cItem::CreateItem()
 
 	stItem.type = (E_TYPE)GetRandom(ET_MAX);
 	stItem.PosX = WINSIZEX + m_pImage->GetFrameWidth();
-	stItem.PosY = WINSIZEY - m_pImage->GetFrameHeight();
+	stItem.PosY = WINSIZEY - m_pImage->GetFrameHeight() - 200;
 
 	switch (stItem.type)
 	{
 	case ET_COIN:
+	
 		break;
 	case ET_SPEED:
+	
 		break;
 	}
 

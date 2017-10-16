@@ -1,11 +1,6 @@
 #pragma once
 #include "cGameNode.h"
 
-#include "cMap.h"
-#include "cPlayer.h"
-#include "cObject.h"
-#include "cItem.h"
-
 class cMap;
 class cPlayer;
 class cObject;

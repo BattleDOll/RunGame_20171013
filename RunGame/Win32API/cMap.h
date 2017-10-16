@@ -4,9 +4,10 @@
 class cMap
 {
 private:
-	cImage*		m_pBgImage;
-	int			m_nSourX;
-	int			m_nMoveSpeed;
+	cImage*	m_pBgImage;
+	int		m_nSourX;
+	int		m_nMoveSpeed;
+	int		m_SlowDelay;
 
 public:
 	cMap();
@@ -16,6 +17,7 @@ public:
 	void Update();
 	void Render();
 
-	void SetMoveSpeed(int speed) { m_nMoveSpeed = speed; }
+	int GetSlow() { return m_SlowDelay; }
+	void SetSlow(int delay) { m_SlowDelay = delay; }
 };
 

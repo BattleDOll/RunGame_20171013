@@ -1,6 +1,9 @@
 #pragma once
 #include "cImage.h"
 
+class cMap;
+class cPlayer;
+
 #define GEN_DELAY 30
 #define OBJECT_SPEED 10
 
@@ -20,10 +23,12 @@ private:
 	vector<tagItem>				m_vecItem;			//오브젝트 벡터
 	vector<tagItem>::iterator	m_vecIter;			//오브젝트 벡터 반복자
 
-	cImage*				m_pImage;
+	cImage*		m_pImage;
 
-	int					m_nDelay;
+	int			m_nDelay;					// 오브젝트 생성 딜레이 계산용.
 
+	cMap*		m_pMap;
+	cPlayer*	m_pPlayer;
 public:
 	cItem();
 	~cItem();
@@ -31,7 +36,8 @@ public:
 	void Setup();
 	void Update();
 	void Render();
-	void CreateItem();
 
+	void CreateItem();
+	void SetMap(cMap* map) { m_pMap = map; }
 };
 
